@@ -1,2 +1,4 @@
-<p>input works!</p>
-<input type="text" />
+<form [formGroup]="form">
+    <input type="text" id="location" name="location" placeholder="Enter location" formControlName="location" />
+    <button type="submit">Search</button>
+</form>
