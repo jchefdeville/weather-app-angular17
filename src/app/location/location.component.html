@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
     <input type="text" id="location" name="location" placeholder="Enter location" formControlName="location" />
     <button type="submit">Search</button>
 </form>

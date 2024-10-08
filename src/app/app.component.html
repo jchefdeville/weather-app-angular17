@@ -1,2 +1,2 @@
-<app-input />
-<app-weather-result />
+<app-location (town)="onTownReceveived($event)" />
+<app-weather-result [town]="town" />
