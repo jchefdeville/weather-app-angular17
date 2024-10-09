@@ -1,5 +1,6 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { WeatherService } from '../weather.service';
 
 @Component({
   selector: 'app-location',
@@ -11,7 +12,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class LocationComponent {
 
   town = output<string | null>();
-
+  weatherService = inject(WeatherService);
+  
   form = new FormGroup({
     location: new FormControl('Niort')
   })
@@ -23,6 +25,8 @@ export class LocationComponent {
     this.town.emit(this.form.controls.location.value);
 
     this.form.reset();
+
+    this.weatherService.callApi();
   }
 
 }

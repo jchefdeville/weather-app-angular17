@@ -1,7 +1,7 @@
-@if (!town()) {
-    <p>Please select a town</p>
-} @else { 
-    <h1>{{ town() }}</h1>
-    <p>weather-result works!</p>
+<h1>{{ town() }}</h1>
+
+@if (town() === 'Niort') {
     <p>Temperature : 20° C</p>
+} @else {
+    <p>No temperature available</p>
 }
