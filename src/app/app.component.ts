@@ -14,9 +14,14 @@ export class AppComponent {
   title = 'weather-app-angular17';
   
   town: string | null = ''; 
+  weatherData: any;
 
   onTownReceveived($event: string | null) {
     console.log(`App component $event`);
     this.town = $event;
+  }
+
+  onWeatherDataReceived($event: any) {
+    this.weatherData = $event;
   }
 }

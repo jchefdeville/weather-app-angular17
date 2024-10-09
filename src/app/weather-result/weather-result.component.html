@@ -1,7 +1,18 @@
 <h1>{{ town() }}</h1>
 
-@if (town() === 'Niort') {
-    <p>Temperature : 20° C</p>
-} @else {
-    <p>No temperature available</p>
-}
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Hour</th>
+                <th>Temperature (°C)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let time of weatherData().time; let i = index">
+                <td>{{ time | date:'shortTime' }}</td>
+                <td>{{ weatherData().temperature2m[i] | number:'1.0-1' }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

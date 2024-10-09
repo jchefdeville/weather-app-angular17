@@ -37,22 +37,21 @@ export class WeatherService {
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData = {
 
-      hourly: {
-        time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
-          (t) => new Date((t + utcOffsetSeconds) * 1000)
-        ),
-        temperature2m: hourly.variables(0)!.valuesArray()!,
-      },
-
+      time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
+        (t) => new Date((t + utcOffsetSeconds) * 1000)
+      ),
+      temperature2m: hourly.variables(0)!.valuesArray()!,
     };
 
     console.log(weatherData);
 
+    return weatherData;
+
     // `weatherData` now contains a simple structure with arrays for datetime and weather data
-    for (let i = 0; i < weatherData.hourly.time.length; i++) {
+    for (let i = 0; i < weatherData.time.length; i++) {
       console.log(
-        weatherData.hourly.time[i].toISOString(),
-        weatherData.hourly.temperature2m[i]
+        weatherData.time[i].toISOString(),
+        weatherData.temperature2m[i]
       );
     }
   }
