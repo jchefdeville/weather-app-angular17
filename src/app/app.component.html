@@ -1,7 +1,7 @@
 <app-location (town)="onTownReceveived($event)" (weatherData)="onWeatherDataReceived($event)" />
 
-@if (town) {
-    <app-weather-result [town]="town" [weatherData]="weatherData" />
+@if (town && weatherData) {
+    <app-weather-result [town]="town" [weatherData]="weatherData!" />
 } @else { 
     <p>Please select a town</p>
 }

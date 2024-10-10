@@ -12,7 +12,7 @@ import { WeatherData } from '../weather-data.model';
 })
 export class LocationComponent {
 
-  town = output<string | null>();
+  town = output<string>();
   weatherData = output<WeatherData>();
 
   weatherService = inject(WeatherService);
@@ -23,9 +23,8 @@ export class LocationComponent {
 
   async onSubmit() {
     console.log(this.form);
-    console.log(this.form.controls.location.value);
 
-    this.town.emit(this.form.controls.location.value);
+    this.town.emit(this.form.controls.location.value!);
 
     this.form.reset();
 

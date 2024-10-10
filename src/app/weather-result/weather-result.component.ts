@@ -19,7 +19,6 @@ export class WeatherResultComponent implements OnChanges {
     weatherService = inject(WeatherService);
 
     ngOnChanges(changes: SimpleChanges): void {
-      console.log(this.town());
-      console.log(this.weatherData());
+      console.log("On change" + changes);
     }
 }

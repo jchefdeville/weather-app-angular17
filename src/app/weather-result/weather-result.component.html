@@ -6,12 +6,16 @@
             <tr>
                 <th>Hour</th>
                 <th>Temperature (°C)</th>
+                <th>precipitationProbability</th>
+                <th>precipitation</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let time of weatherData().time; let i = index">
                 <td>{{ time | date:'shortTime' }}</td>
                 <td>{{ weatherData().temperature2m[i] | number:'1.0-1' }}</td>
+                <td>{{ weatherData().precipitationProbability[i] }}</td>
+                <td>{{ weatherData().precipitation[i] }}</td>
             </tr>
         </tbody>
     </table>
