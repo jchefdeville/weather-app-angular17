@@ -1,4 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <input type="text" id="location" name="location" placeholder="Enter location" formControlName="location" />
-    <button type="submit">Search</button>
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-inline">
+    <div class="form-group mb-3">
+        <input type="text" id="location" name="location" placeholder="Enter location" formControlName="location" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary mb-3">Search</button>
 </form>

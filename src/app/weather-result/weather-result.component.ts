@@ -1,6 +1,6 @@
 import { Component, inject, input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { WeatherService } from '../weather.service';
+import { WeatherService } from '../weather-forecast.service';
 import { WeatherData } from '../weather-data.model';
 import { CommonModule, DatePipe } from '@angular/common';
 

@@ -1,7 +1,9 @@
-<app-location (town)="onTownReceveived($event)" (weatherData)="onWeatherDataReceived($event)" />
+<div class="container">
+    <app-location (town)="onTownReceveived($event)" (weatherData)="onWeatherDataReceived($event)" />
 
-@if (town && weatherData) {
-    <app-weather-result [town]="town" [weatherData]="weatherData!" />
-} @else { 
-    <p>Please select a town</p>
-}
+    @if (town && weatherData) {
+        <app-weather-result [town]="town" [weatherData]="weatherData!" />
+    } @else { 
+        <p>Please select a town</p>
+    }
+</div>
