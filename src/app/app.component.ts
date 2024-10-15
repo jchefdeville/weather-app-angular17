@@ -15,8 +15,17 @@ export class AppComponent {
   title = 'weather-app-angular17';
   
   city: CityResult | undefined;
+  error: boolean;
+
+  constructor() {
+    this.error = false;
+  }
 
   onCityReceveived($event: CityResult) {
     this.city = $event;
+  }
+
+  onError($event: boolean) {
+    this.error = $event;
   }
 }

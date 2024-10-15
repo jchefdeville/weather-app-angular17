@@ -14,6 +14,7 @@ import { HttpClient } from '@angular/common/http';
 export class LocationComponent {
 
   city = output<CityResult | undefined>();
+  error = output<boolean>();
   weatherData = output<WeatherData>();
 
   private latitude = 0;
@@ -29,6 +30,8 @@ export class LocationComponent {
 
   async onSubmit() {
     // console.log(this.form);
+
+    this.error.emit(false);
 
     const cityLocation = this.form.controls.location.value!;
 
@@ -47,6 +50,11 @@ export class LocationComponent {
     this.httpClient.get<GeocodingDataResults>(url).subscribe({
       next: (resData) => {
         console.log(resData);
+
+        if (!resData.results) {
+          this.error.emit(true);
+          return;
+        }
 
         const cityResult = resData.results[0];
         this.latitude = cityResult.latitude;

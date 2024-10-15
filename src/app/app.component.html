@@ -1,7 +1,10 @@
 <div class="container">
-    <app-location (city)="onCityReceveived($event!)" />
+    <app-location (city)="onCityReceveived($event!)" (error)="onError($event) "/>
 
-    @if (city) {
+    @if (error) {
+        <p>City not found</p>
+    }
+    @else if (city) {
         <app-weather-result [city]="city" />
     } @else { 
         <p>Please select a town</p>
