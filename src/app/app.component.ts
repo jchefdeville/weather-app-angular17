@@ -14,14 +14,9 @@ import { CityResult, WeatherData } from './weather-data.model';
 export class AppComponent {
   title = 'weather-app-angular17';
   
-  city: CityResult | undefined; 
-  weatherData: WeatherData | undefined;
+  city: CityResult | undefined;
 
   onCityReceveived($event: CityResult) {
     this.city = $event;
-  }
-
-  onWeatherDataReceived($event: WeatherData) {
-    this.weatherData = $event;
   }
 }

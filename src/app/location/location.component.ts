@@ -1,6 +1,5 @@
 import { Component, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { WeatherForecastService } from '../weather-forecast.service';
 import { CityResult, GeocodingDataResults, WeatherData } from '../weather-data.model';
 import { GeocodingService } from '../geocoding-service.service';
 import { HttpClient } from '@angular/common/http';
@@ -14,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class LocationComponent {
 
-  city = output<CityResult>();
+  city = output<CityResult | undefined>();
   weatherData = output<WeatherData>();
 
   private latitude = 0;
@@ -23,7 +22,6 @@ export class LocationComponent {
   private httpClient = inject(HttpClient);
 
   geocachingService = inject(GeocodingService);
-  weatherForecastService = inject(WeatherForecastService);
   
   form = new FormGroup({
     location: new FormControl('Niort')
@@ -33,6 +31,12 @@ export class LocationComponent {
     // console.log(this.form);
 
     const cityLocation = this.form.controls.location.value!;
+
+    // Add a validator ?
+    if (!cityLocation) {
+      this.city.emit(undefined);
+      return;
+    }
 
     console.log("location=" + cityLocation);
 
@@ -51,8 +55,6 @@ export class LocationComponent {
         this.city.emit(cityResult);
       }
     })
-
-    this.weatherData.emit(await this.weatherForecastService.callWeatherForescastApi(this.latitude, this.longitude));
   }
 
 }

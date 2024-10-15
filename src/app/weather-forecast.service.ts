@@ -11,10 +11,10 @@ export class WeatherForecastService {
     "latitude": 0,
     "longitude": 0,
     "current": ["temperature_2m", "is_day", "precipitation", "rain", "weather_code", "wind_speed_10m"],
-    "hourly": ["temperature_2m", "precipitation_probability", "precipitation"],
+    "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover", "wind_speed_10m"],
     "forecast_days": 1,
     "timezone": "Europe/London", // 
-    // "models": "meteofrance_seamless",
+    "models": "meteofrance_seamless",
     "format": 'json',
   };
   url = "https://api.open-meteo.com/v1/forecast";
@@ -24,6 +24,8 @@ export class WeatherForecastService {
   async callWeatherForescastApi(latitude: number, longitude: number) {
     this.params.latitude = latitude;
     this.params.longitude = longitude;
+
+    console.log("Call with latitude=" + latitude + ' and longitude=' + longitude);
 
     const responses = await fetchWeatherApi(this.url, this.params);
 
@@ -41,23 +43,17 @@ export class WeatherForecastService {
     console.log("utcOffsetSeconds=" + utcOffsetSeconds);
 
     const current = response.current()!;
-    console.log("current.time()=" + Number(current.time()));
     console.log("currentDate=" + new Date(Number(current.time()) * 1000));
 
     const hourly = response.hourly()!;
-
-    console.log("hourly.time()=" + Number(hourly.time()));
     console.log("hourlyDate=" + new Date(Number(hourly.time()) * 1000));
-    console.log("hourly.timeEnd()=" + hourly.timeEnd());
     console.log("hourly.interval()=" + hourly.interval());
-
-    console.log(hourly.variables);
 
 
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData: WeatherData = {
         current : {
-          time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
+          time: new Date((Number(current.time())) * 1000),
           temperature2m: current.variables(0)!.value(),
           isDay: current.variables(1)!.value(),
           precipitation: current.variables(2)!.value(),
@@ -68,7 +64,6 @@ export class WeatherForecastService {
         hourly : {
           time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
             (t) => {
-              console.log(hourly.time());
               const date = new Date((t + utcOffsetSeconds - 7200) * 1000); // TODO : hardcode 7200
               //console.log(date);
 
@@ -76,8 +71,17 @@ export class WeatherForecastService {
             }
           ),
           temperature2m: hourly.variables(0)!.valuesArray()!,
-          precipitationProbability: hourly.variables(1)!.valuesArray()!,
-          precipitation: hourly.variables(2)!.valuesArray()!,
+          relativeHumidity2m: hourly.variables(1)!.valuesArray()!,
+          dewPoint2m: hourly.variables(2)!.valuesArray()!,
+          apparentTemperature: hourly.variables(3)!.valuesArray()!,
+          precipitation: hourly.variables(4)!.valuesArray()!,
+          rain: hourly.variables(5)!.valuesArray()!,
+          snowfall: hourly.variables(6)!.valuesArray()!,
+          weatherCode: hourly.variables(7)!.valuesArray()!,
+          pressureMsl: hourly.variables(8)!.valuesArray()!,
+          surfacePressure: hourly.variables(9)!.valuesArray()!,
+          cloudCover: hourly.variables(10)!.valuesArray()!,
+          windSpeed10m: hourly.variables(11)!.valuesArray()!
         }
     };
 

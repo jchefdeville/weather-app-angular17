@@ -2,6 +2,7 @@ import { Component, inject, input, OnChanges, SimpleChanges } from '@angular/cor
 
 import { CityResult, WeatherData } from '../weather-data.model';
 import { CommonModule, DatePipe } from '@angular/common';
+import { WeatherForecastService } from '../weather-forecast.service';
 
 @Component({
   selector: 'app-weather-result',
@@ -13,9 +14,17 @@ import { CommonModule, DatePipe } from '@angular/common';
 export class WeatherResultComponent implements OnChanges {
 
     city = input.required<CityResult>();
-    weatherData = input.required<WeatherData>();
+    weatherData: WeatherData | undefined;
+
+    weatherForecastService = inject(WeatherForecastService);
 
     ngOnChanges(changes: SimpleChanges): void {
-      console.log("On change" + changes);
+      this.weatherForecastService.callWeatherForescastApi(this.city().latitude, this.city().longitude)
+        .then((data: WeatherData) => {
+          this.weatherData = data;
+        })
+        .catch((error) => {
+          console.error('Erreur while calling WeatherForecast API:', error);
+        });
     }
 }

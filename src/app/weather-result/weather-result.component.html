@@ -1,51 +1,60 @@
-<div class="container mt-4">
-    <div class="row text-center">
-        <div class="col">
-            <h2>{{ city().name }}</h2>
-            <h4>{{ weatherData().current.time | date: 'dd/MM/yyyy HH:mm' }}</h4>
+@if (!weatherData) {
+    <div>Toto</div>
+} @else {
+    <div class="container mt-4">
+        <!-- Component-->
+        <div class="row text-center">
+            <div class="col">
+                <h2>{{ city().name + ' - ' + city().admin2 }}</h2>
+                <h3>{{ city().admin1 }} </h3>
+                <h4>{{ weatherData.current.time | date: 'dd/MM/yyyy - HH:mm' }}</h4>
+            </div>
+        </div>
+    
+        <!-- Component-->
+        <div class="row text-center">
+            <div class="col">
+                <i class="wi wi-thermometer"></i>
+                <p>Temperature: {{ weatherData.current.temperature2m | number:'1.0-1' }}°C</p>
+            </div>
+            <div class="col">
+                <i class="wi wi-rain"></i>
+                <p>Precipitation: {{ weatherData.current.precipitation }} mm</p>
+            </div>
+            <div class="col">
+                <i class="wi wi-strong-wind"></i>
+                <p>Wind: {{ weatherData.current.windSpeed10m | number:'1.0-1' }} km/h</p>
+            </div>
+            <div class="col">
+                <i class="wi" [ngClass]="{
+                    'wi-day-sunny': weatherData.current.isDay === 1, 
+                    'wi-night-clear': weatherData.current.isDay === 0
+                }"></i>
+                <p>{{ weatherData.current.isDay ? 'Day' : 'Night' }}</p>
+            </div>
+            <h2>TODO : Add a refresh button every 15 minutes available</h2>
+        </div>
+    
+        <!-- Component-->
+        <div class="row text-center">
+            <table class="weather-table">
+                <thead>
+                    <tr>
+                        <th>Hour</th>
+                        <th>Temperature (°C)</th>
+                        <th>Precipitation (mm)</th>
+                        <th>Wind (km/h)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let time of weatherData.hourly.time; let i = index">
+                        <td>{{ time | date:'HH:mm' }}</td>
+                        <td>{{ weatherData.hourly.temperature2m[i] | number:'1.0-1' }}</td>
+                        <td>{{ weatherData.hourly.precipitation[i] | number:'1.0-1' }}</td>
+                        <td>{{ weatherData.hourly.windSpeed10m[i] | number:'1.0-1' }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-    <div class="row text-center">
-        <div class="col">
-            <i class="wi wi-thermometer"></i>
-            <p>Temperature: {{ weatherData().current.temperature2m | number:'1.0-1' }}°C</p>
-        </div>
-        <div class="col">
-            <i class="wi wi-rain"></i>
-            <p>Precipitation: {{ weatherData().current.precipitation }} mm</p>
-        </div>
-        <div class="col">
-            <i class="wi wi-strong-wind"></i>
-            <p>Wind: {{ weatherData().current.windSpeed10m | number:'1.0-1' }} km/h</p>
-        </div>
-        <div class="col">
-            <i class="wi" [ngClass]="{
-                'wi-day-sunny': weatherData().current.isDay === 1, 
-                'wi-night-clear': weatherData().current.isDay === 0
-            }"></i>
-            <p>{{ weatherData().current.isDay ? 'Day' : 'Night' }}</p>
-        </div>
-        <h2>TODO : Add a refresh button every 15 minutes available</h2>
-    </div>
-
-    <div>
-        <table class="weather-table">
-            <thead>
-                <tr>
-                    <th>Hour</th>
-                    <th>Temperature (°C)</th>
-                    <th>Probability</th>
-                    <th>Precipitation (mm)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let time of weatherData().hourly.time; let i = index">
-                    <td>{{ time | date:'HH:mm' }}</td>
-                    <td>{{ weatherData().hourly.temperature2m[i] | number:'1.0-1' }}</td>
-                    <td>{{ weatherData().hourly.precipitationProbability[i] }}</td>
-                    <td>{{ weatherData().hourly.precipitation[i] | number:'1.0-1' }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
+}

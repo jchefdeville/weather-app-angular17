@@ -24,7 +24,16 @@ export type WeatherData = {
     hourly : {
         time: Date[],
         temperature2m: Float32Array,
-        precipitationProbability: Float32Array,
-        precipitation: Float32Array
+        relativeHumidity2m: Float32Array,
+        dewPoint2m: Float32Array,
+        apparentTemperature: Float32Array,
+        precipitation: Float32Array,
+        rain: Float32Array,
+        snowfall: Float32Array,
+        weatherCode: Float32Array,
+        pressureMsl: Float32Array,
+        surfacePressure: Float32Array,
+        cloudCover: Float32Array,
+        windSpeed10m: Float32Array
     }
 };
