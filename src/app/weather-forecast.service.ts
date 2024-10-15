@@ -25,7 +25,7 @@ export class WeatherForecastService {
     this.params.latitude = latitude;
     this.params.longitude = longitude;
 
-    console.log("Call with latitude=" + latitude + ' and longitude=' + longitude);
+    console.log("fetchWeatherApi with latitude=" + latitude + ' and longitude=' + longitude);
 
     const responses = await fetchWeatherApi(this.url, this.params);
 
