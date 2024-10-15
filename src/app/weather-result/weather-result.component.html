@@ -7,12 +7,12 @@
             <div class="col">
                 <h2>{{ city().name + ' - ' + city().admin2 }}</h2>
                 <h3>{{ city().admin1 }} </h3>
-                <h4>{{ weatherData.current.time | date: 'dd/MM/yyyy - HH:mm' }}</h4>
             </div>
         </div>
     
         <!-- Component-->
         <div class="row text-center">
+            <h4>{{ weatherData.current.time | date: 'dd/MM/yyyy - HH:mm' }}</h4>
             <div class="col">
                 <i class="wi wi-thermometer"></i>
                 <p>Temperature: {{ weatherData.current.temperature2m | number:'1.0-1' }}°C</p>
