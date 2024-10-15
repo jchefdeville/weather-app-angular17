@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <div class="row text-center">
         <div class="col">
-            <h2>{{ town() }}</h2>
+            <h2>{{ city().name }}</h2>
             <h4>{{ weatherData().current.time | date: 'dd/MM/yyyy HH:mm' }}</h4>
         </div>
     </div>
@@ -35,7 +35,7 @@
                     <th>Hour</th>
                     <th>Temperature (°C)</th>
                     <th>Probability</th>
-                    <th>Precipitation</th>
+                    <th>Precipitation (mm)</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,7 +43,7 @@
                     <td>{{ time | date:'HH:mm' }}</td>
                     <td>{{ weatherData().hourly.temperature2m[i] | number:'1.0-1' }}</td>
                     <td>{{ weatherData().hourly.precipitationProbability[i] }}</td>
-                    <td>{{ weatherData().hourly.precipitation[i] }}</td>
+                    <td>{{ weatherData().hourly.precipitation[i] | number:'1.0-1' }}</td>
                 </tr>
             </tbody>
         </table>

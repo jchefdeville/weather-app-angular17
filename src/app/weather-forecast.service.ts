@@ -8,8 +8,8 @@ import { WeatherData } from './weather-data.model';
 export class WeatherForecastService {
 
   params = {
-    "latitude": 46.3231,
-    "longitude": -0.4588,
+    "latitude": 0,
+    "longitude": 0,
     "current": ["temperature_2m", "is_day", "precipitation", "rain", "weather_code", "wind_speed_10m"],
     "hourly": ["temperature_2m", "precipitation_probability", "precipitation"],
     "forecast_days": 1,
@@ -21,7 +21,10 @@ export class WeatherForecastService {
 
   constructor() { }
 
-  async callWeatherForescastApi() { 
+  async callWeatherForescastApi(latitude: number, longitude: number) {
+    this.params.latitude = latitude;
+    this.params.longitude = longitude;
+
     const responses = await fetchWeatherApi(this.url, this.params);
 
     // Helper function to form time ranges

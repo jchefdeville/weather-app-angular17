@@ -2,7 +2,7 @@ import { Component, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LocationComponent } from "./location/location.component";
 import { WeatherResultComponent } from "./weather-result/weather-result.component";
-import { WeatherData } from './weather-data.model';
+import { CityResult, WeatherData } from './weather-data.model';
 
 @Component({
   selector: 'app-root',
@@ -14,11 +14,11 @@ import { WeatherData } from './weather-data.model';
 export class AppComponent {
   title = 'weather-app-angular17';
   
-  town: string = ''; 
+  city: CityResult | undefined; 
   weatherData: WeatherData | undefined;
 
-  onTownReceveived($event: string) {
-    this.town = $event;
+  onCityReceveived($event: CityResult) {
+    this.city = $event;
   }
 
   onWeatherDataReceived($event: WeatherData) {

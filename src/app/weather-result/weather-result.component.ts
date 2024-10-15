@@ -1,6 +1,6 @@
 import { Component, inject, input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { WeatherData } from '../weather-data.model';
+import { CityResult, WeatherData } from '../weather-data.model';
 import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
@@ -12,7 +12,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 })
 export class WeatherResultComponent implements OnChanges {
 
-    town = input.required<string>();
+    city = input.required<CityResult>();
     weatherData = input.required<WeatherData>();
 
     ngOnChanges(changes: SimpleChanges): void {
