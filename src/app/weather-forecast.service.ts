@@ -11,7 +11,8 @@ export class WeatherForecastService {
     "latitude": 0,
     "longitude": 0,
     "current": ["temperature_2m", "is_day", "precipitation", "rain", "weather_code", "wind_speed_10m"],
-    "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover", "wind_speed_10m"],
+    "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", 
+               "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover_low", "wind_speed_10m", "is_day", "precipitation_probability"],
     "forecast_days": 1,
     "timezone": "Europe/London", // 
     "models": "meteofrance_seamless",
@@ -80,8 +81,10 @@ export class WeatherForecastService {
           weatherCode: hourly.variables(7)!.valuesArray()!,
           pressureMsl: hourly.variables(8)!.valuesArray()!,
           surfacePressure: hourly.variables(9)!.valuesArray()!,
-          cloudCover: hourly.variables(10)!.valuesArray()!,
-          windSpeed10m: hourly.variables(11)!.valuesArray()!
+          cloudCoverLow: hourly.variables(10)!.valuesArray()!,
+          windSpeed10m: hourly.variables(11)!.valuesArray()!,
+          isDay: hourly.variables(12)!.valuesArray()!,
+          precipitationProbability: hourly.variables(13)!.valuesArray()!
         }
     };
 

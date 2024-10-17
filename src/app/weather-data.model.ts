@@ -33,7 +33,9 @@ export type WeatherData = {
         weatherCode: Float32Array,
         pressureMsl: Float32Array,
         surfacePressure: Float32Array,
-        cloudCover: Float32Array,
-        windSpeed10m: Float32Array
+        cloudCoverLow: Float32Array,
+        windSpeed10m: Float32Array,
+        isDay: Float32Array,
+        precipitationProbability: Float32Array
     }
 };
