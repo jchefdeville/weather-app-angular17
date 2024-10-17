@@ -23,6 +23,14 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
     weatherForecastService = inject(WeatherForecastService);
 
     ngOnChanges(changes: SimpleChanges): void {
+      this.callWeatherForecastApi();
+    }
+
+    ngOnDestroy(): void {
+      this.unsubscribeTimer();
+    }
+
+    callWeatherForecastApi() {
       this.weatherForecastService.callWeatherForescastApi(this.city().latitude, this.city().longitude)
         .then((data: WeatherData) => {
           this.weatherData = data;
@@ -33,10 +41,6 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
           this.weatherData = undefined;
           console.error('Erreur while calling WeatherForecast API:', error);
         });
-    }
-
-    ngOnDestroy(): void {
-      this.unsubscribeTimer();
     }
 
     updateCountdown(dateResultAPI: Date) {

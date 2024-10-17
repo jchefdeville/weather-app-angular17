@@ -19,7 +19,7 @@
             </div>
             <div class="col">
                 <i class="wi wi-rain"></i>
-                <p>Precipitation: {{ weatherData.current.precipitation }} mm</p>
+                <p>Precipitation: {{ weatherData.current.precipitation | number:'1.0-1' }} mm</p>
             </div>
             <div class="col">
                 <i class="wi wi-strong-wind"></i>
@@ -32,7 +32,13 @@
                 }"></i>
                 <p>{{ weatherData.current.isDay ? 'Day' : 'Night' }}</p>
             </div>
-            <h2>Next refresh in: {{ countdown }} seconds</h2>
+
+            @if (countdown > 0) {
+                <h2>Next refresh available in : {{ countdown }} seconds</h2>
+                <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">REFRESH</button>
+            } @else {
+                <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">REFRESH</button>
+            }
         </div>
     
         <!-- Component-->

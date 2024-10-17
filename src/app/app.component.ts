@@ -16,6 +16,7 @@ export class AppComponent {
   
   city: CityResult | undefined;
   error: boolean;
+  errorMsg: string | undefined = undefined;
 
   constructor() {
     this.error = false;
@@ -27,5 +28,6 @@ export class AppComponent {
 
   onError($event: boolean) {
     this.error = $event;
+    this.errorMsg = 'error';
   }
 }
