@@ -35,9 +35,8 @@
 
             @if (countdown > 0) {
                 <h2>Next refresh available in : {{ countdown }} seconds</h2>
-                <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">REFRESH</button>
             } @else {
-                <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">REFRESH</button>
+                <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">Refresh</button>
             }
         </div>
     
