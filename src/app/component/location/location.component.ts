@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, OnInit, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CityResult, GeocodingDataResults, WeatherData } from '../../model/weather-data.model';
 import { GeocodingService } from '../../service/geocoding-service.service';
@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './location.component.html',
   styleUrl: './location.component.css'
 })
-export class LocationComponent {
+export class LocationComponent implements OnInit {
 
   city = output<CityResult | undefined>();
   error = output<boolean>();
@@ -19,10 +19,16 @@ export class LocationComponent {
   
   httpClient = inject(HttpClient);
   geocachingService = inject(GeocodingService);
+
+  DEFAULT_CITY = 'Niort';
   
   form = new FormGroup({
-    location: new FormControl('Niort')
+    location: new FormControl(this.DEFAULT_CITY)
   })
+
+  ngOnInit(): void {
+      this.callGeocodingApi(this.DEFAULT_CITY);
+  }
 
   async onSubmit() {
     // console.log(this.form);
@@ -41,6 +47,10 @@ export class LocationComponent {
 
     // this.form.reset();
 
+    this.callGeocodingApi(cityLocation);
+  }
+
+  callGeocodingApi(cityLocation: string) {
     const url = 'https://geocoding-api.open-meteo.com/v1/search?name=' + cityLocation + '&count=10&language=fr&format=json';
 
     this.httpClient.get<GeocodingDataResults>(url).subscribe({
