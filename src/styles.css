@@ -1,5 +1,6 @@
 /* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 /* Global styles */
 * {
   margin: 0;
@@ -15,6 +16,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
 .weather-table {
   width: 100%;
   border-collapse: collapse;
@@ -42,6 +44,17 @@ body {
 }
 
 h1 {
-  text-align: center;
+  color: #007bff;
+  font-weight: bold;
+}
+
+h4 {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.countdown {
+  font-size: 1.2rem;
+  font-weight: bold;
   color: #007bff;
 }

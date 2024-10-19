@@ -5,14 +5,15 @@
         <!-- Component-->
         <div class="row text-center">
             <div class="col">
-                <h2>{{ city().name + ' - ' + city().admin2 }}</h2>
-                <h3>{{ city().admin1 }} </h3>
+                <h1>{{ city().name + ' - ' + city().admin2 }}</h1>
+                <h2>{{ city().admin1 }} </h2>
             </div>
         </div>
     
         <!-- Component-->
         <div class="row text-center">
-            <h4>{{ weatherData.current.time | date: 'dd/MM/yyyy - HH:mm' }}</h4>
+            <h3>{{ weatherData.current.time | date: 'dd/MM/yyyy' }}</h3>
+
             <div class="col">
                 <i class="wi wi-thermometer"></i>
                 <p>Temperature: {{ weatherData.current.temperature2m | number:'1.0-1' }}°C</p>
@@ -33,8 +34,12 @@
                 <p>{{ weatherData.current.isDay ? 'Day' : 'Night' }}</p>
             </div>
 
+            <div class="row">
+                <h4>Last update at {{ weatherData.current.time | date: 'HH:mm' }}</h4>
+            </div>
+
             @if (countdown > 0) {
-                <h2>Next refresh available in : {{ countdown }} seconds</h2>
+                <h2 class="countdown">Next refresh available in {{ countdown }} seconds</h2>
             } @else {
                 <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">Refresh</button>
             }
@@ -49,8 +54,8 @@
                         <th>Temperature (°C)</th>
                         <th>Precipitation (mm)</th>
                         <th>Wind (km/h)</th>
-                        <th>Low Cloud cover</th>
-                        <th>Weather code</th>
+                        <th>Low Cloud cover (%)</th>
+                        <th>Interpretation</th>
                         <th>Day / Night</th>
                     </tr>
                 </thead>
@@ -64,7 +69,8 @@
                                 <td>{{ weatherData.hourly.windSpeed10m[$index] | number:'1.0-1' }}</td>
                                 <td>{{ weatherData.hourly.cloudCoverLow[$index] }}</td>
                                 <td>
-                                    {{ weatherData.hourly.weatherCode[$index] | weatherInterpretation  }}
+                                    <i class="wi {{ weatherData.hourly.weatherCode[$index] | weatherInterpretation: 'icon' }}"></i>
+                                    {{ weatherData.hourly.weatherCode[$index] | weatherInterpretation: 'description' }}
                                 </td>
                                 <td>
                                     <i class="wi" [ngClass]="{
