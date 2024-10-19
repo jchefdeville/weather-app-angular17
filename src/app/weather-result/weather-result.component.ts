@@ -17,6 +17,8 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
     city = input.required<CityResult>();
     weatherData: WeatherData | undefined;
 
+    now = new Date();
+
     countdown = 900; // 15 minutes = 900 seconds
     timerSubscription!: Subscription;
 
@@ -31,6 +33,9 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
     }
 
     callWeatherForecastApi() {
+      
+      this.now = new Date();
+
       this.weatherForecastService.callWeatherForescastApi(this.city().latitude, this.city().longitude)
         .then((data: WeatherData) => {
           this.weatherData = data;

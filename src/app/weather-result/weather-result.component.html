@@ -55,32 +55,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let time of weatherData.hourly.time; let i = index">
-                        <td>{{ time | date:'HH' }}h </td>
-                        <td>{{ weatherData.hourly.temperature2m[i] | number:'1.0-1' }}</td>
-                        <td>{{ weatherData.hourly.precipitation[i] | number:'1.0-1' }} ({{ weatherData.hourly.precipitationProbability[i] + '%'}})</td>
-                        <td>{{ weatherData.hourly.windSpeed10m[i] | number:'1.0-1' }}</td>
-                        <td>{{ weatherData.hourly.cloudCoverLow[i] }}</td>
-                        <td>
-                            {{ weatherData.hourly.weatherCode[i] }}
-                            @if (weatherData.hourly.weatherCode[i] == 3) {
-                                Mainly clear, partly cloudy, and overcast
-                            } @else if (weatherData.hourly.weatherCode[i] == 51) {
-                                Drizzle: Light, moderate, and dense intensity
-                            } @else if (weatherData.hourly.weatherCode[i] == 53) {
-                                Drizzle: Light, moderate, and dense intensity
-                            } @else if (weatherData.hourly.weatherCode[i] == 61) {
-                                Rain: Slight, moderate and heavy intensity
-                            }
-                        </td>
-                        <td>
-                            <i class="wi" [ngClass]="{
-                                'wi-day-sunny': weatherData.hourly.isDay[i] === 1, 
-                                'wi-night-clear': weatherData.hourly.isDay[i] === 0
-                                }">
-                            </i>
-                        </td>
-                    </tr>
+                    @for (time of weatherData.hourly.time; track time) {
+                        @if (time > now) {
+                            <tr>
+                                <td>{{ time | date:'HH' }}h </td>
+                                <td>{{ weatherData.hourly.temperature2m[$index] | number:'1.0-1' }}</td>
+                                <td>{{ weatherData.hourly.precipitation[$index] | number:'1.0-1' }} ({{ weatherData.hourly.precipitationProbability[$index] + '%'}})</td>
+                                <td>{{ weatherData.hourly.windSpeed10m[$index] | number:'1.0-1' }}</td>
+                                <td>{{ weatherData.hourly.cloudCoverLow[$index] }}</td>
+                                <td>
+                                    {{ weatherData.hourly.weatherCode[$index] }}
+                                    @if (weatherData.hourly.weatherCode[$index] == 3) {
+                                        Mainly clear, partly cloudy, and overcast
+                                    } @else if (weatherData.hourly.weatherCode[$index] == 51) {
+                                        Drizzle: Light, moderate, and dense intensity
+                                    } @else if (weatherData.hourly.weatherCode[$index] == 53) {
+                                        Drizzle: Light, moderate, and dense intensity
+                                    } @else if (weatherData.hourly.weatherCode[$index] == 61) {
+                                        Rain: Slight, moderate and heavy intensity
+                                    }
+                                </td>
+                                <td>
+                                    <i class="wi" [ngClass]="{
+                                        'wi-day-sunny': weatherData.hourly.isDay[$index] === 1, 
+                                        'wi-night-clear': weatherData.hourly.isDay[$index] === 0
+                                        }">
+                                    </i>
+                                </td>
+                            </tr>
+                        }
+                    }
                 </tbody>
             </table>
         </div>
