@@ -1,14 +1,15 @@
 import { Component, inject, input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 
-import { CityResult, WeatherData } from '../weather-data.model';
+import { CityResult, WeatherData } from '../../model/weather-data.model';
 import { CommonModule, DatePipe } from '@angular/common';
-import { WeatherForecastService } from '../weather-forecast.service';
 import { count, interval, Subscription, take } from 'rxjs';
+import { WeatherForecastService } from '../../service/weather-forecast.service';
+import { WeatherInterpretationPipe } from '../../pipe/weather-interpretation.pipe';
 
 @Component({
   selector: 'app-weather-result',
   standalone: true,
-  imports: [DatePipe, CommonModule],
+  imports: [DatePipe, WeatherInterpretationPipe, CommonModule],
   templateUrl: './weather-result.component.html',
   styleUrl: './weather-result.component.css'
 })

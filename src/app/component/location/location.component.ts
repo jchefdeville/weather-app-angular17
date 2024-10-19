@@ -1,7 +1,7 @@
 import { Component, inject, output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CityResult, GeocodingDataResults, WeatherData } from '../weather-data.model';
-import { GeocodingService } from '../geocoding-service.service';
+import { CityResult, GeocodingDataResults, WeatherData } from '../../model/weather-data.model';
+import { GeocodingService } from '../../service/geocoding-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -16,12 +16,8 @@ export class LocationComponent {
   city = output<CityResult | undefined>();
   error = output<boolean>();
   weatherData = output<WeatherData>();
-
-  private latitude = 0;
-  private longitude = 0;
   
-  private httpClient = inject(HttpClient);
-
+  httpClient = inject(HttpClient);
   geocachingService = inject(GeocodingService);
   
   form = new FormGroup({
@@ -57,8 +53,6 @@ export class LocationComponent {
         }
 
         const cityResult = resData.results[0];
-        this.latitude = cityResult.latitude;
-        this.longitude = cityResult.longitude;
 
         this.city.emit(cityResult);
       }

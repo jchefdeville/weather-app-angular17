@@ -1,8 +1,8 @@
 import { Component, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { LocationComponent } from "./location/location.component";
-import { WeatherResultComponent } from "./weather-result/weather-result.component";
-import { CityResult, WeatherData } from './weather-data.model';
+import { LocationComponent } from "./component/location/location.component";
+import { WeatherResultComponent } from "./component/weather-result/weather-result.component";
+import { CityResult, WeatherData } from './model/weather-data.model';
 
 @Component({
   selector: 'app-root',

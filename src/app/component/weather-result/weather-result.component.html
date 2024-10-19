@@ -64,16 +64,7 @@
                                 <td>{{ weatherData.hourly.windSpeed10m[$index] | number:'1.0-1' }}</td>
                                 <td>{{ weatherData.hourly.cloudCoverLow[$index] }}</td>
                                 <td>
-                                    {{ weatherData.hourly.weatherCode[$index] }}
-                                    @if (weatherData.hourly.weatherCode[$index] == 3) {
-                                        Mainly clear, partly cloudy, and overcast
-                                    } @else if (weatherData.hourly.weatherCode[$index] == 51) {
-                                        Drizzle: Light, moderate, and dense intensity
-                                    } @else if (weatherData.hourly.weatherCode[$index] == 53) {
-                                        Drizzle: Light, moderate, and dense intensity
-                                    } @else if (weatherData.hourly.weatherCode[$index] == 61) {
-                                        Rain: Slight, moderate and heavy intensity
-                                    }
+                                    {{ weatherData.hourly.weatherCode[$index] | weatherInterpretation  }}
                                 </td>
                                 <td>
                                     <i class="wi" [ngClass]="{
