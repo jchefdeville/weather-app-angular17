@@ -1,0 +1,39 @@
+<div class="row text-center">
+    <table class="weather-table">
+        <thead>
+            <tr>
+                <th>Hour</th>
+                <th>Temperature (°C)</th>
+                <th>Precipitation (mm)</th>
+                <th>Wind (km/h)</th>
+                <th>Low Cloud cover (%)</th>
+                <th>Interpretation</th>
+                <th>Day / Night</th>
+            </tr>
+        </thead>
+        <tbody>
+           @for (time of hourlyWeatherData().time; track time) {
+                @if (time > now) {
+                     <tr>
+                        <td>{{ time | date:'HH' }}h </td>
+                        <td>{{ hourlyWeatherData().temperature2m[$index] | number:'1.0-1' }}</td>
+                        <td>{{ hourlyWeatherData().precipitation[$index] | number:'1.0-1' }} ({{ hourlyWeatherData().precipitationProbability[$index] + '%'}})</td>
+                        <td>{{ hourlyWeatherData().windSpeed10m[$index] | number:'1.0-1' }}</td>
+                        <td>{{ hourlyWeatherData().cloudCoverLow[$index] }}</td>
+                        <td>
+                            <i class="wi {{ hourlyWeatherData().weatherCode[$index] | weatherInterpretation: 'icon' }}"></i>
+                            {{ hourlyWeatherData().weatherCode[$index] | weatherInterpretation: 'description' }}
+                        </td>
+                        <td>
+                            <i class="wi" [ngClass]="{
+                                'wi-day-sunny': hourlyWeatherData().isDay[$index] === 1, 
+                                'wi-night-clear': hourlyWeatherData().isDay[$index] === 0
+                                }">
+                            </i>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

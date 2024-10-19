@@ -2,14 +2,17 @@ import { Component, inject, input, OnChanges, OnDestroy, SimpleChanges } from '@
 
 import { CityResult, WeatherData } from '../../model/weather-data.model';
 import { CommonModule, DatePipe } from '@angular/common';
-import { count, interval, Subscription, take } from 'rxjs';
+import { interval, Subscription, take } from 'rxjs';
 import { WeatherForecastService } from '../../service/weather-forecast.service';
 import { WeatherInterpretationPipe } from '../../pipe/weather-interpretation.pipe';
+import { HeaderWeatherResultComponent } from "./header-weather-result/header-weather-result.component";
+import { CurrentWeatherResultComponent } from "./current-weather-result/current-weather-result.component";
+import { HourlyWeatherResultComponent } from "./hourly-weather-result/hourly-weather-result.component";
 
 @Component({
   selector: 'app-weather-result',
   standalone: true,
-  imports: [DatePipe, WeatherInterpretationPipe, CommonModule],
+  imports: [DatePipe, WeatherInterpretationPipe, CommonModule, HeaderWeatherResultComponent, CurrentWeatherResultComponent, HourlyWeatherResultComponent],
   templateUrl: './weather-result.component.html',
   styleUrl: './weather-result.component.css'
 })
@@ -17,8 +20,6 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
 
     city = input.required<CityResult>();
     weatherData: WeatherData | undefined;
-
-    now = new Date();
 
     countdown = 900; // 15 minutes = 900 seconds
     timerSubscription!: Subscription;
@@ -34,8 +35,6 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
     }
 
     callWeatherForecastApi() {
-      
-      this.now = new Date();
 
       this.weatherForecastService.callWeatherForescastApi(this.city().latitude, this.city().longitude)
         .then((data: WeatherData) => {

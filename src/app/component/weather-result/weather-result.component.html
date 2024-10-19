@@ -2,88 +2,30 @@
     <div>Please wait while retrieving results</div>
 } @else {
     <div class="container mt-4">
-        <!-- Component-->
-        <div class="row text-center">
-            <div class="col">
-                <h1>{{ city().name + ' - ' + city().admin2 }}</h1>
-                <h2>{{ city().admin1 }} </h2>
-            </div>
-        </div>
-    
-        <!-- Component-->
-        <div class="row text-center">
-            <h3>{{ weatherData.current.time | date: 'dd/MM/yyyy' }}</h3>
+        
+        <app-header-weather-result [city]="city()" />
 
-            <div class="col">
-                <i class="wi wi-thermometer"></i>
-                <p>Temperature: {{ weatherData.current.temperature2m | number:'1.0-1' }}°C</p>
-            </div>
-            <div class="col">
-                <i class="wi wi-rain"></i>
-                <p>Precipitation: {{ weatherData.current.precipitation | number:'1.0-1' }} mm</p>
-            </div>
-            <div class="col">
-                <i class="wi wi-strong-wind"></i>
-                <p>Wind: {{ weatherData.current.windSpeed10m | number:'1.0-1' }} km/h</p>
-            </div>
-            <div class="col">
-                <i class="wi" [ngClass]="{
-                    'wi-day-sunny': weatherData.current.isDay === 1, 
-                    'wi-night-clear': weatherData.current.isDay === 0
-                }"></i>
-                <p>{{ weatherData.current.isDay ? 'Day' : 'Night' }}</p>
-            </div>
+        <app-current-weather-result [currentWeatherData]="weatherData.current" [countdown]="countdown" (refresh)="callWeatherForecastApi()" />
 
-            <div class="row">
-                <h4>Last update at {{ weatherData.current.time | date: 'HH:mm' }}</h4>
-            </div>
-
-            @if (countdown > 0) {
-                <h2 class="countdown">Next refresh available in {{ countdown }} seconds</h2>
-            } @else {
-                <button type="button" (click)="callWeatherForecastApi()" class="btn btn-info mb-3">Refresh</button>
-            }
-        </div>
-    
-        <!-- Component-->
-        <div class="row text-center">
-            <table class="weather-table">
-                <thead>
-                    <tr>
-                        <th>Hour</th>
-                        <th>Temperature (°C)</th>
-                        <th>Precipitation (mm)</th>
-                        <th>Wind (km/h)</th>
-                        <th>Low Cloud cover (%)</th>
-                        <th>Interpretation</th>
-                        <th>Day / Night</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (time of weatherData.hourly.time; track time) {
-                        @if (time > now) {
-                            <tr>
-                                <td>{{ time | date:'HH' }}h </td>
-                                <td>{{ weatherData.hourly.temperature2m[$index] | number:'1.0-1' }}</td>
-                                <td>{{ weatherData.hourly.precipitation[$index] | number:'1.0-1' }} ({{ weatherData.hourly.precipitationProbability[$index] + '%'}})</td>
-                                <td>{{ weatherData.hourly.windSpeed10m[$index] | number:'1.0-1' }}</td>
-                                <td>{{ weatherData.hourly.cloudCoverLow[$index] }}</td>
-                                <td>
-                                    <i class="wi {{ weatherData.hourly.weatherCode[$index] | weatherInterpretation: 'icon' }}"></i>
-                                    {{ weatherData.hourly.weatherCode[$index] | weatherInterpretation: 'description' }}
-                                </td>
-                                <td>
-                                    <i class="wi" [ngClass]="{
-                                        'wi-day-sunny': weatherData.hourly.isDay[$index] === 1, 
-                                        'wi-night-clear': weatherData.hourly.isDay[$index] === 0
-                                        }">
-                                    </i>
-                                </td>
-                            </tr>
-                        }
-                    }
-                </tbody>
-            </table>
-        </div>
+        <app-hourly-weather-result [hourlyWeatherData]="weatherData.hourly" />
     </div>
+
+    @if (true && false) {
+        <div class="row">
+            <h4>Daily</h4>
+    
+            @for (time of weatherData.daily.time; track time) {
+                <div>
+                    <p>{{ time | date }} </p>
+                    <p>Sunrise {{ weatherData.daily.sunrise ? weatherData.daily.sunrise[$index] : 0 }}</p>
+                    <p>Sunset {{ weatherData.daily.sunset ? weatherData.daily.sunset[$index] : 0}}</p>
+                    <p>Dailight duration {{ weatherData.daily.daylightDuration[$index] }}</p>
+                    <p>Sunshine duration {{ weatherData.daily.sunshineDuration[$index] }}</p>
+                </div>
+            }
+    
+        </div>
+    }
+
+    
 }

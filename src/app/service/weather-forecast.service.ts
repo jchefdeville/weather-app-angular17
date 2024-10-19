@@ -13,6 +13,7 @@ export class WeatherForecastService {
     "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", 
                "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover_low", "wind_speed_10m", "is_day", "precipitation_probability"],
     "forecast_days": 1,
+	  "daily": ["sunrise", "sunset", "daylight_duration", "sunshine_duration"],
     "timezone": "Europe/London", // 
     "models": "meteofrance_seamless",
     "format": 'json',
@@ -49,6 +50,8 @@ export class WeatherForecastService {
     console.log("hourlyDate=" + new Date(Number(hourly.time()) * 1000));
     console.log("hourly.interval()=" + hourly.interval());
 
+    const daily = response.daily()!;
+
 
     // Note: The order of weather variables in the URL query and the indices below need to match!
     const weatherData: WeatherData = {
@@ -84,7 +87,17 @@ export class WeatherForecastService {
           windSpeed10m: hourly.variables(11)!.valuesArray()!,
           isDay: hourly.variables(12)!.valuesArray()!,
           precipitationProbability: hourly.variables(13)!.valuesArray()!
-        }
+        }, 
+        daily: {
+          time: range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map(
+            (t) => new Date((t + utcOffsetSeconds) * 1000)
+          ),
+          sunrise: daily.variables(0)!.valuesArray()!,
+          sunset: daily.variables(1)!.valuesArray()!,
+          daylightDuration: daily.variables(2)!.valuesArray()!,
+          sunshineDuration: daily.variables(3)!.valuesArray()!,
+        },
+      
     };
 
     console.log(weatherData);
