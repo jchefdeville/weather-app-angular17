@@ -7,7 +7,7 @@
 
         <app-current-weather-result [currentWeatherData]="weatherData.current" />
 
-        <app-countdown-weather-result [countdown]="countdown" (refresh)="callWeatherForecastApi()" />
+        <app-countdown-weather-result [currentWeatherDataTime]="weatherData.current.time" (refresh)="callWeatherForecastApi()" />
 
         <app-hourly-weather-result [hourlyWeatherData]="weatherData.hourly" />
     </div>

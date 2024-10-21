@@ -17,13 +17,10 @@ import { CountdownWeatherResultComponent } from "./countdown-weather-result/coun
   templateUrl: './weather-result.component.html',
   styleUrl: './weather-result.component.css'
 })
-export class WeatherResultComponent implements OnChanges, OnDestroy {
+export class WeatherResultComponent implements OnChanges {
 
     city = input.required<CityResult>();
     weatherData: WeatherData | undefined;
-
-    countdown = 900; // 15 minutes = 900 seconds
-    timerSubscription!: Subscription;
 
     weatherForecastService = inject(WeatherForecastService);
 
@@ -31,17 +28,11 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
       this.callWeatherForecastApi();
     }
 
-    ngOnDestroy(): void {
-      this.unsubscribeTimer();
-    }
-
     callWeatherForecastApi() {
 
       this.weatherForecastService.callWeatherForescastApi(this.city().latitude, this.city().longitude)
         .then((data: WeatherData) => {
           this.weatherData = data;
-
-          this.startCountdown(this.weatherData.current.time);
         })
         .catch((error) => {
           this.weatherData = undefined;
@@ -49,30 +40,5 @@ export class WeatherResultComponent implements OnChanges, OnDestroy {
         });
     }
 
-    updateCountdown(dateResultAPI: Date) {
-      const currentDate = new Date();
-      const differenceInMilliseconds = currentDate.getTime() - dateResultAPI.getTime();
-      
-      const differenceInSeconds = Math.floor(differenceInMilliseconds / 1000);
-      this.countdown = 900 - differenceInSeconds;
-    }
-
-    startCountdown(dateResultAPI: Date) {
-      this.updateCountdown(dateResultAPI);
-
-      this.unsubscribeTimer();
-
-      this.timerSubscription = interval(1000)
-        .pipe(take(this.countdown))
-        .subscribe(() => {
-          this.countdown--;
-        });
-    }
-
-    unsubscribeTimer() {
-      if (this.timerSubscription) {
-        this.timerSubscription.unsubscribe();
-      }
-    }
 
 }
