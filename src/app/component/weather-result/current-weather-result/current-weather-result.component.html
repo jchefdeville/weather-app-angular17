@@ -27,7 +27,7 @@
     </div>
 
     @if (countdown() > 0) {
-        <h2 class="countdown">Next refresh available in {{ countdown() }} seconds</h2>
+        <h2 class="countdown">Next refresh available in {{ countdown() | minuteSeconds }} </h2>
     } @else {
         <button type="button" (click)="onClickRefresh()" class="btn btn-info mb-3">Refresh</button>
     }
