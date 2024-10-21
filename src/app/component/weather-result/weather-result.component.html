@@ -5,7 +5,9 @@
         
         <app-header-weather-result [city]="city()" />
 
-        <app-current-weather-result [currentWeatherData]="weatherData.current" [countdown]="countdown" (refresh)="callWeatherForecastApi()" />
+        <app-current-weather-result [currentWeatherData]="weatherData.current" />
+
+        <app-countdown-weather-result [countdown]="countdown" (refresh)="callWeatherForecastApi()" />
 
         <app-hourly-weather-result [hourlyWeatherData]="weatherData.hourly" />
     </div>

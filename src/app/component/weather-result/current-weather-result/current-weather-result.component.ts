@@ -13,11 +13,4 @@ import { MinuteSecondsPipe } from '../../../pipe/minute-seconds.pipe';
 export class CurrentWeatherResultComponent {
 
   currentWeatherData = input.required<CurrentWeatherData>();
-  countdown = input.required<number>();
-
-  refresh = output<boolean>();
-
-  onClickRefresh() {
-    this.refresh.emit(true);
-  }
 }
