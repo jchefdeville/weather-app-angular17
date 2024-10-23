@@ -2,7 +2,6 @@ import { Component, inject, input, OnChanges, OnDestroy, SimpleChanges } from '@
 
 import { CityResult, WeatherData } from '../../model/weather-data.model';
 import { CommonModule, DatePipe } from '@angular/common';
-import { interval, Subscription, take } from 'rxjs';
 import { WeatherForecastService } from '../../service/weather-forecast.service';
 import { WeatherInterpretationPipe } from '../../pipe/weather-interpretation.pipe';
 import { HeaderWeatherResultComponent } from "./header-weather-result/header-weather-result.component";
