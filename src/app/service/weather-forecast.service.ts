@@ -34,6 +34,11 @@ export class WeatherForecastService {
     const range = (start: number, stop: number, step: number) =>
       Array.from({ length: (stop - start) / step }, (_, i) => start + i * step);
 
+    const convertToDates = (valuesInt64: (index: number) => bigint, length: number, utcOffsetSeconds: number) => 
+      Array.from({ length }, (_, i) => 
+        new Date(Number(valuesInt64(i)) * 1000 + utcOffsetSeconds * 1000)
+      );
+
     // Process first location. Add a for-loop for multiple locations or weather models
     const response = responses[0];
     // console.log(JSON.stringify(response, null, 2));
@@ -92,8 +97,12 @@ export class WeatherForecastService {
           time: range(Number(daily.time()), Number(daily.timeEnd()), daily.interval()).map(
             (t) => new Date((t + utcOffsetSeconds) * 1000)
           ),
-          sunrise: daily.variables(0)!.valuesArray()!,
-          sunset: daily.variables(1)!.valuesArray()!,
+          sunrise: Array.from({ length: daily.variables(0)!.valuesInt64Length() }, (_, i) => 
+            new Date(Number(daily.variables(0)!.valuesInt64(i)) * 1000)
+          ),
+          sunset: Array.from({ length: daily.variables(1)!.valuesInt64Length() }, (_, i) => 
+            new Date(Number(daily.variables(1)!.valuesInt64(i)) * 1000)
+          ),
           daylightDuration: daily.variables(2)!.valuesArray()!,
           sunshineDuration: daily.variables(3)!.valuesArray()!,
         },

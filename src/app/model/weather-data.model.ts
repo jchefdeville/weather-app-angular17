@@ -44,8 +44,8 @@ export type WeatherData = {
     hourly : HourlyWeatherData,
     daily : {
         time: Date[],
-        sunrise: Float32Array,
-        sunset: Float32Array,
+        sunrise: any,
+        sunset: Date[],
         daylightDuration: Float32Array,
         sunshineDuration: Float32Array
     }
