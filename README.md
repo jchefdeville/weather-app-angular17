@@ -17,7 +17,7 @@ Navigate to `http://localhost:4200/`. The application will automatically reload 
 
 ## Customize the Style  
 You can modify the existing styles to fit your preferences !  
-Feel free to adjust the CSS or SCSS files to change the layout, colors, fonts, or any other visual elements.  
+Feel free to adjust the CSS / HTML files to change the layout, colors, fonts, or any other visual elements.  
 
 ## Live Demo
 Check out the live version of the app at `https://jchefdeville.github.io/weather-app-angular17`
