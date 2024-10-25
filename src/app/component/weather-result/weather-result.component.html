@@ -9,15 +9,27 @@
 
         <app-countdown-weather-result [currentWeatherDataTime]="weatherData.current.time" (refresh)="callWeatherForecastApi()" />
 
-        <div class="row">
+        <div class="row weather-card daily-info">
             <h4>Daily</h4>
 
             @for (time of weatherData.daily.time; track time) {
-                <div>
-                    <p>Sunrise {{ weatherData.daily.sunrise[$index] | date:'HH:mm' }}</p>
-                    <p>Sunset {{ weatherData.daily.sunset[$index] | date:'HH:mm' }}</p>
-                    <p>Daylight duration {{ weatherData.daily.daylightDuration[$index] | minuteSeconds }}</p>
-                    <p>Sunshine duration {{ weatherData.daily.sunshineDuration[$index] | minuteSeconds }}</p>
+                <div class="row">
+                    <div class="col">
+                        <p>Sunrise</p>
+                        <p>{{ weatherData.daily.sunrise[$index] | date:'HH:mm' }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Sunset<p>
+                        <p>{{ weatherData.daily.sunset[$index] | date:'HH:mm' }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Daylight duration</p>
+                        <p>{{ weatherData.daily.daylightDuration[$index] | minuteSeconds }}</p>
+                    </div>
+                    <div class="col">
+                        <p>Sunshine duration</p>
+                        <p>{{ weatherData.daily.sunshineDuration[$index] | minuteSeconds }}</p>
+                    </div>
                 </div>
             }
         </div>

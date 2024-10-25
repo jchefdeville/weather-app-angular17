@@ -1,28 +1,32 @@
+<div class="row text-center weather-card">
+    
+    <div class="date-box">
+        <h3>{{ currentWeatherData().time | date: 'dd/MM/yyyy' }}</h3>
+    </div>
+    
+    <div class="weather-info">
+        <div class="col">
+            <i class="wi wi-thermometer"></i>
+            <p>Temperature: {{ currentWeatherData().temperature2m | number:'1.0-1' }}°C</p>
+        </div>
+        <div class="col">
+            <i class="wi wi-rain"></i>
+            <p>Precipitation: {{ currentWeatherData().precipitation | number:'1.0-1' }} mm</p>
+        </div>
+        <div class="col">
+            <i class="wi wi-strong-wind"></i>
+            <p>Wind: {{ currentWeatherData().windSpeed10m | number:'1.0-1' }} km/h</p>
+        </div>
+        <div class="col">
+            <i class="wi" [ngClass]="{
+                'wi-day-sunny': currentWeatherData().isDay === 1, 
+                'wi-night-clear': currentWeatherData().isDay === 0
+            }"></i>
+            <p>{{ currentWeatherData().isDay ? 'Day' : 'Night' }}</p>
+        </div>
+    </div>
 
-<div class="row text-center">
-    <h3>{{ currentWeatherData().time | date: 'dd/MM/yyyy' }}</h3>
-
-    <div class="col">
-        <i class="wi wi-thermometer"></i>
-        <p>Temperature: {{ currentWeatherData().temperature2m | number:'1.0-1' }}°C</p>
-    </div>
-    <div class="col">
-        <i class="wi wi-rain"></i>
-        <p>Precipitation: {{ currentWeatherData().precipitation | number:'1.0-1' }} mm</p>
-    </div>
-    <div class="col">
-        <i class="wi wi-strong-wind"></i>
-        <p>Wind: {{ currentWeatherData().windSpeed10m | number:'1.0-1' }} km/h</p>
-    </div>
-    <div class="col">
-        <i class="wi" [ngClass]="{
-            'wi-day-sunny': currentWeatherData().isDay === 1, 
-            'wi-night-clear': currentWeatherData().isDay === 0
-        }"></i>
-        <p>{{ currentWeatherData().isDay ? 'Day' : 'Night' }}</p>
-    </div>
-
-    <div class="row">
+    <div class="row last-update">
         <h4>Last update at {{ currentWeatherData().time | date: 'HH:mm' }}</h4>
     </div>
 </div>
