@@ -72,7 +72,7 @@ export class WeatherForecastService {
         hourly : {
           time: range(Number(hourly.time()), Number(hourly.timeEnd()), hourly.interval()).map(
             (t) => {
-              const date = new Date((t + utcOffsetSeconds - 7200) * 1000); // TODO : hardcode 7200
+              const date = new Date((t + utcOffsetSeconds - 3600) * 1000); // TODO : hardcode 3600
               //console.log(date);
 
               return date;
