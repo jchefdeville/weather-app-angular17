@@ -10,11 +10,12 @@ export class MinuteSecondsPipe implements PipeTransform {
         const minutes: number = Math.floor(value / 60);
         const seconds = value - minutes * 60;
 
-        let transformation = minutes + 'min';
+        let transformation = `${minutes}min`;
 
         if (seconds > 0) {
-            transformation += seconds;
+            transformation += ` ${seconds}s`;
         }
+
 
         return transformation;
     }

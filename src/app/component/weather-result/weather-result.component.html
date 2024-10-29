@@ -14,21 +14,17 @@
 
             @for (time of weatherData.daily.time; track time) {
                 <div class="row">
-                    <div class="col">
+                    <div class="col-md-4">
                         <p>Sunrise</p>
                         <p>{{ weatherData.daily.sunrise[$index] | date:'HH:mm' }}</p>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <p>Sunset<p>
                         <p>{{ weatherData.daily.sunset[$index] | date:'HH:mm' }}</p>
                     </div>
-                    <div class="col">
+                    <div class="col-md-4">
                         <p>Daylight duration</p>
-                        <p>{{ weatherData.daily.daylightDuration[$index] | minuteSeconds }}</p>
-                    </div>
-                    <div class="col">
-                        <p>Sunshine duration</p>
-                        <p>{{ weatherData.daily.sunshineDuration[$index] | minuteSeconds }}</p>
+                        <p>{{ weatherData.daily.daylightDuration[$index] | hourMinutes }}</p>
                     </div>
                 </div>
             }

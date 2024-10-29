@@ -9,11 +9,12 @@ import { CurrentWeatherResultComponent } from "./current-weather-result/current-
 import { HourlyWeatherResultComponent } from "./hourly-weather-result/hourly-weather-result.component";
 import { CountdownWeatherResultComponent } from "./countdown-weather-result/countdown-weather-result.component";
 import { MinuteSecondsPipe } from '../../pipe/minute-seconds.pipe';
+import { HourMinutesPipe } from '../../pipe/hour-minutes.pipe';
 
 @Component({
   selector: 'app-weather-result',
   standalone: true,
-  imports: [DatePipe, MinuteSecondsPipe, CommonModule, HeaderWeatherResultComponent, CurrentWeatherResultComponent, HourlyWeatherResultComponent, CountdownWeatherResultComponent],
+  imports: [DatePipe, MinuteSecondsPipe, HourMinutesPipe, CommonModule, HeaderWeatherResultComponent, CurrentWeatherResultComponent, HourlyWeatherResultComponent, CountdownWeatherResultComponent],
   templateUrl: './weather-result.component.html',
   styleUrl: './weather-result.component.css'
 })
