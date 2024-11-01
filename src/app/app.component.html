@@ -1,5 +1,8 @@
+<div class="header">
+    <app-location (city)="onCityReceveived($event!)" (error)="onError($event)"></app-location>
+</div>
+
 <div class="container">
-    <app-location (city)="onCityReceveived($event!)" (error)="onError($event) "/>
 
     @if (error) {
         <p>City not found</p>

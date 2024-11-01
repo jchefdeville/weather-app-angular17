@@ -1,13 +1,15 @@
 @if (!weatherData) {
     <div>Please wait while retrieving results</div>
 } @else {
+    <div class="refresh-message mb-4">
+        <app-countdown-weather-result [currentWeatherDataTime]="weatherData.current.time" (refresh)="callWeatherForecastApi()" />
+    </div>
+
     <div class="container mt-4">
         
         <app-header-weather-result [city]="city()" />
 
         <app-current-weather-result [currentWeatherData]="weatherData.current" />
-
-        <app-countdown-weather-result [currentWeatherDataTime]="weatherData.current.time" (refresh)="callWeatherForecastApi()" />
 
         <div class="row weather-card daily-info">
             <h4>Daily</h4>
