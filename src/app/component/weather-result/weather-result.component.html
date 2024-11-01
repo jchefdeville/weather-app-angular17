@@ -19,12 +19,12 @@
                         <p>{{ weatherData.daily.sunrise[$index] | date:'HH:mm' }}</p>
                     </div>
                     <div class="col-md-4">
-                        <p>Sunset<p>
-                        <p>{{ weatherData.daily.sunset[$index] | date:'HH:mm' }}</p>
-                    </div>
-                    <div class="col-md-4">
                         <p>Daylight duration</p>
                         <p>{{ weatherData.daily.daylightDuration[$index] | hourMinutes }}</p>
+                    </div>
+                    <div class="col-md-4">
+                        <p>Sunset<p>
+                        <p>{{ weatherData.daily.sunset[$index] | date:'HH:mm' }}</p>
                     </div>
                 </div>
             }
