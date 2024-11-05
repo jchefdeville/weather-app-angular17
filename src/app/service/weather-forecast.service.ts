@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { fetchWeatherApi } from 'openmeteo';
 import { WeatherData } from '../model/weather-data.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +11,11 @@ export class WeatherForecastService {
     "latitude": 0,
     "longitude": 0,
     "current": ["temperature_2m", "is_day", "precipitation", "rain", "weather_code", "wind_speed_10m"],
+    "forecast_days": 1,
+    // "start_date": "2024-11-06",
+    // "end_date": "2024-11-06",
     "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", 
                "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover_low", "wind_speed_10m", "is_day", "precipitation_probability"],
-    "forecast_days": 1,
 	  "daily": ["sunrise", "sunset", "daylight_duration", "sunshine_duration"],
     "timezone": "Europe/London", // 
     "models": "meteofrance_seamless",
@@ -25,6 +28,8 @@ export class WeatherForecastService {
   async callWeatherForescastApi(latitude: number, longitude: number) {
     this.params.latitude = latitude;
     this.params.longitude = longitude;
+
+    // this.params.start_date = 
 
     console.log("fetchWeatherApi with latitude=" + latitude + ' and longitude=' + longitude);
 

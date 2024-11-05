@@ -12,9 +12,8 @@
         <app-current-weather-result [currentWeatherData]="weatherData.current" />
 
         <div class="row weather-card daily-info">
-            <h4>Daily</h4>
-
             @for (time of weatherData.daily.time; track time) {
+                <h4>{{ time | date:'dd/MM/yyyy' }}</h4>
                 <div class="row">
                     <div class="col-md-4">
                         <p>Sunrise</p>
