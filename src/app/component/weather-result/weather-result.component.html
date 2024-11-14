@@ -11,6 +11,9 @@
 
         <app-current-weather-result [currentWeatherData]="weatherData.current" />
 
+        <button (click)="previousDay()" class="btn btn-info mx-2" [disabled]="isPreviousDayDisabled()">Previous Day</button>
+        <button (click)="nextDay()" class="btn btn-info mx-2" [disabled]="isNextDayDisabled()">Next Day</button>
+
         <div class="row weather-card daily-info">
             @for (time of weatherData.daily.time; track time) {
                 <h4>{{ time | date:'dd/MM/yyyy' }}</h4>

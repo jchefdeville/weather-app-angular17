@@ -11,9 +11,8 @@ export class WeatherForecastService {
     "latitude": 0,
     "longitude": 0,
     "current": ["temperature_2m", "is_day", "precipitation", "rain", "weather_code", "wind_speed_10m"],
-    "forecast_days": 1,
-    // "start_date": "2024-11-06",
-    // "end_date": "2024-11-06",
+    "start_date": "yyyy-MM-dd",
+    "end_date": "yyyy-MM-dd",
     "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", 
                "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover_low", "wind_speed_10m", "is_day", "precipitation_probability"],
 	  "daily": ["sunrise", "sunset", "daylight_duration", "sunshine_duration"],
@@ -25,9 +24,17 @@ export class WeatherForecastService {
 
   constructor() { }
 
-  async callWeatherForescastApi(latitude: number, longitude: number) {
+  async callWeatherForescastApi(latitude: number, longitude: number, date: Date) {
     this.params.latitude = latitude;
     this.params.longitude = longitude;
+    
+    var year = date.getFullYear();
+    var month = String(date.getMonth() + 1).padStart(2, '0');
+    var day = String(date.getDate()).padStart(2, '0');
+
+    var formattedDate = `${year}-${month}-${day}`;
+    this.params.start_date = formattedDate;
+    this.params.end_date = formattedDate;
 
     // this.params.start_date = 
 
