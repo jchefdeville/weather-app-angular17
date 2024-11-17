@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { fetchWeatherApi } from 'openmeteo';
 import { WeatherData } from '../model/weather-data.model';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,9 +11,10 @@ export class WeatherForecastService {
     "latitude": 0,
     "longitude": 0,
     "current": ["temperature_2m", "is_day", "precipitation", "rain", "weather_code", "wind_speed_10m"],
+    "start_date": "yyyy-MM-dd",
+    "end_date": "yyyy-MM-dd",
     "hourly": ["temperature_2m", "relative_humidity_2m", "dew_point_2m", "apparent_temperature", "precipitation", "rain", 
                "snowfall", "weather_code", "pressure_msl", "surface_pressure", "cloud_cover_low", "wind_speed_10m", "is_day", "precipitation_probability"],
-    "forecast_days": 1,
 	  "daily": ["sunrise", "sunset", "daylight_duration", "sunshine_duration"],
     "timezone": "Europe/London", // 
     "models": "meteofrance_seamless",
@@ -22,9 +24,19 @@ export class WeatherForecastService {
 
   constructor() { }
 
-  async callWeatherForescastApi(latitude: number, longitude: number) {
+  async callWeatherForescastApi(latitude: number, longitude: number, date: Date) {
     this.params.latitude = latitude;
     this.params.longitude = longitude;
+    
+    var year = date.getFullYear();
+    var month = String(date.getMonth() + 1).padStart(2, '0');
+    var day = String(date.getDate()).padStart(2, '0');
+
+    var formattedDate = `${year}-${month}-${day}`;
+    this.params.start_date = formattedDate;
+    this.params.end_date = formattedDate;
+
+    // this.params.start_date = 
 
     console.log("fetchWeatherApi with latitude=" + latitude + ' and longitude=' + longitude);
 

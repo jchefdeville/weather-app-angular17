@@ -1,21 +1,26 @@
 @if (!weatherData) {
     <div>Please wait while retrieving results</div>
 } @else {
+    <div class="refresh-message mb-4">
+        <app-countdown-weather-result [currentWeatherDataTime]="weatherData.current.time" (refresh)="callWeatherForecastApi()" />
+    </div>
+
     <div class="container mt-4">
         
         <app-header-weather-result [city]="city()" />
 
         <app-current-weather-result [currentWeatherData]="weatherData.current" />
 
-        <app-countdown-weather-result [currentWeatherDataTime]="weatherData.current.time" (refresh)="callWeatherForecastApi()" />
+        <button (click)="previousDay()" class="btn btn-info mx-2" [disabled]="isPreviousDayDisabled()">Previous Day</button>
+        <button (click)="nextDay()" class="btn btn-info mx-2" [disabled]="isNextDayDisabled()">Next Day</button>
 
         <div class="row weather-card daily-info">
-            <h4>Daily</h4>
-
             @for (time of weatherData.daily.time; track time) {
+                <h4>{{ time | date:'dd/MM/yyyy' }}</h4>
                 <div class="row">
                     <div class="col-md-4">
                         <p>Sunrise</p>
+                        <i class="wi wi-sunrise"></i>
                         <p>{{ weatherData.daily.sunrise[$index] | date:'HH:mm' }}</p>
                     </div>
                     <div class="col-md-4">
@@ -23,7 +28,8 @@
                         <p>{{ weatherData.daily.daylightDuration[$index] | hourMinutes }}</p>
                     </div>
                     <div class="col-md-4">
-                        <p>Sunset<p>
+                        <p>Sunset</p>
+                        <i class="wi wi-sunset"></i>
                         <p>{{ weatherData.daily.sunset[$index] | date:'HH:mm' }}</p>
                     </div>
                 </div>
