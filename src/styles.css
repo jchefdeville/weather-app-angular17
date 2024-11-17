@@ -164,9 +164,43 @@ h4 {
   margin: auto;
 }
 
+/* Footer */
 footer {
+  background-color: #f5f5f5;
+  padding-top: 10px;
   text-align: center;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #555;
+  margin-top: 20px; 
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
+
+footer .footer-content {
+  display: flex;
+  color: black;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  margin: 5px;
+}
+
+footer .source {
+  color: white;
+  align-items: center;
+  justify-content: center;
+  text-decoration: underline;
+  font-size: 13px;
+}
+/* End footer */
+
+/* Seach bar */
+form.form-inline {
+  position: sticky; 
+  top: 0;
+  display: flex;
+  z-index: 1000;
+  gap: 10px;
+}
+
+.form-inline .form-control {
+  width: 1190px;
+}
+
