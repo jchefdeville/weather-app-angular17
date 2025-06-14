@@ -1,6 +1,14 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex">
-    <div class="form-group mb-3">
-        <input type="text" id="location" name="location" placeholder="Enter location" formControlName="location" class="form-control" />
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-inline w-100">
+    <div class="flex-grow-1 me-2">
+      <input
+        type="text"
+        id="location"
+        name="location"
+        formControlName="location"
+        class="form-control"
+        placeholder="Enter location"
+      />
     </div>
-    <button type="submit" class="btn btn-primary mb-3">Search</button>
-</form>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+  
