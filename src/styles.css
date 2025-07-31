@@ -8,12 +8,12 @@
   box-sizing: border-box;
 }
 
-/* Body styles */
 body {
   background: linear-gradient(to bottom, #f0f4ff, #e0e8ff);
   background-position: center;
   background-size: cover;
   color: #333;
+  font-family: 'Poppins', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -23,20 +23,27 @@ body {
   width: 100%;
   padding: 1rem;
   background-color: #f0f4ff;
-  display: flex;
-  justify-content: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
 }
 
+app-location {
+  display: block;
+  width: 100%;
+  max-width: 800px;
+}
+
+/* Weather Cards */
 .weather-card {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.85);
   backdrop-filter: blur(10px);
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
-  margin: 1rem;
   transition: transform 0.2s;
+  height: 100%;
 }
 
 .weather-card:hover {
@@ -46,81 +53,71 @@ body {
 .weather-card i {
   font-size: 1.5rem;
   color: #007BFF;
+  margin-bottom: 0.5rem;
 }
 
+/* Card layout for both current and daily info */
+.daily-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+/* Sunrise, sunset, daylight grid inside cards */
+.weather-info {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+/* Last update text */
+.last-update {
+  text-align: center;
+  font-size: 0.9em;
+  margin-top: auto;
+}
+
+/* Refresh message box */
 .refresh-message {
   padding: 1rem;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   max-width: 400px;
-  margin: 0 auto;
+  margin: 0 auto 1rem auto;
   text-align: center;
 }
 
+/* Date box header inside card */
 .date-box {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.date-box h2 {
+.date-box h2, .date-box h3 {
   font-size: 1.5em;
-  color: #333;
+  color: #007bff;
 }
 
-.weather-info {
-  display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: auto;
 }
 
-.info-box {
-  text-align: center;
-}
-
-.info-box img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 10px;
-}
-
-.info-box p {
-  font-size: 1em;
-  color: #333;
-}
-
-.last-update {
-  text-align: center;
-  font-size: 0.9em;
-  margin-bottom: 20px;
-}
-
-.daily-info {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.daily-info h3 {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.daily-info p {
-  font-size: 0.9em;
-  color: #555;
-}
-
+/* Hourly Forecast Table */
 .hourly-forecast {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
 }
 
-.hourly-forecast th, .hourly-forecast td {
+.hourly-forecast th,
+.hourly-forecast td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
@@ -141,27 +138,16 @@ body {
   background-color: #f1f1f1;
 }
 
-h1 {
+/* Typography */
+h1, h4 {
   color: #007bff;
   font-weight: bold;
-}
-
-h4 {
-  color: #007bff;
 }
 
 .countdown {
   font-size: 1.2rem;
   font-weight: bold;
   color: #007bff;
-}
-
-.container {
-  /* display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px; */
-  max-width: 1200px;
-  margin: auto;
 }
 
 /* Footer */
@@ -184,23 +170,38 @@ footer .footer-content {
 
 footer .source {
   color: white;
-  align-items: center;
-  justify-content: center;
   text-decoration: underline;
   font-size: 13px;
 }
-/* End footer */
 
-/* Seach bar */
+/* Search bar */
 form.form-inline {
   position: sticky; 
   top: 0;
   display: flex;
   z-index: 1000;
   gap: 10px;
+  width: 100%;
 }
 
 .form-inline .form-control {
-  width: 1190px;
+  width: 100%;
+}
+
+@media (max-width: 576px) {
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-inline .form-control,
+  .form-inline .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.form-inline .form-control {
+  width: 100%;
 }
 
